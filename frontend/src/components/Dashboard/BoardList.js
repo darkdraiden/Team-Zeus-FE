@@ -6,7 +6,7 @@ import dashboard_img from "../../imgs/home_bg.svg";
 function BoardList(props) {
   const user_name = props.user_name;
   const boards_list = props.boardData;
-  console.log(user_name);
+
   const board = boards_list.map((ele) => {
     const boardDetailsUrl = `/${user_name}/${ele.board_id}/board_details`;
     return (

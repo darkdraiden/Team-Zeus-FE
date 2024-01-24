@@ -13,6 +13,8 @@ const BoardView = () => {
   const board_id = location.state.board_id;
   const boardData = location.state.boardData;
 
+  console.log(user_name);
+
   const [taskData, setTaskData] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -20,7 +22,8 @@ const BoardView = () => {
         let res = await axios.get(
           `http://127.0.0.1:8000/${user_name}/${board_id}/board_details`
         );
-        setTaskData(res.data.data.task);
+        setTaskData(res.data.data.task_list);
+        console.log(res);
       } catch (e) {
         console.log(e);
       }
