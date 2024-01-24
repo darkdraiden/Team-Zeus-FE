@@ -1,0 +1,52 @@
+.table {
+  margin-top: 20px;
+}
+
+.table-header {
+  text-align: center;
+}
+
+.table-cell {
+  text-align: center;
+}
+
+.task-box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tr-first-child div:hover {
+  background-color: #71c5c445;
+}
+.tr-second-child div:hover {
+  background-color: #c1e0da41;
+}
+.tr-third-child div:hover {
+  background-color: #f8e7db9b;
+}
+.tr-fourth-child div:hover {
+  background-color: #fcbdbf45;
+}
+
+.task-box h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.task-box p {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+}
+
+.task-box .time {
+  color: #6c757d;
+}
+
+#tasktable_div {
+  height: 90vh;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
