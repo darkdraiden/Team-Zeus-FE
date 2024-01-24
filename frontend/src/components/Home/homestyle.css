@@ -37,7 +37,6 @@ p {
   background: url("./home_bg2.webp") no-repeat center center/cover;
   z-index: -1;
   opacity: 0.9;
-  /* border-radius: 0 0 4rem 4rem; */
 }
 nav {
   overflow: auto;

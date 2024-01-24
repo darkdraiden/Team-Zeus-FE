@@ -1,4 +1,4 @@
-.table {
+Table {
   margin-top: 20px;
 }
 
@@ -8,6 +8,7 @@
 
 .table-cell {
   text-align: center;
+  padding: 1rem 0.5rem!important;
 }
 
 .task-box {
@@ -18,17 +19,20 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.tr-first-child div:hover {
+.tr-first-child div {
   background-color: #71c5c445;
 }
-.tr-second-child div:hover {
+.tr-second-child div {
   background-color: #c1e0da41;
 }
-.tr-third-child div:hover {
+.tr-third-child div {
   background-color: #f8e7db9b;
 }
-.tr-fourth-child div:hover {
+.tr-fourth-child div{
   background-color: #fcbdbf45;
+}
+tr div:hover{
+    background-color: white;
 }
 
 .task-box h4 {

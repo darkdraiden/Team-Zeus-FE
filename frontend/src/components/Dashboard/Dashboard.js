@@ -27,11 +27,11 @@ function Dashboard(props) {
   });
 
   return (
-    <>
+    <div id="body_dashboard">
       <div id="dashboard">
         <BoardList user_name={user_name} boardData={boardData}/>
       </div>
-    </>
+    </div>
   );
 }
 
