@@ -19,7 +19,8 @@ function LoginPage() {
       setUserName("");
       setPassword("");
       if(res.data.success){
-        navigate("/dashboard");
+        console.log(res.data);
+        navigate(`/${user_name}/dashboard`,{state:{user_name:user_name}});
       }
       else{
         alert("Invalid Credentials !");
