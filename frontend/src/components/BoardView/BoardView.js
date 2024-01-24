@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "./Boardview.css";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation} from "react-router";
 import TitleBar from "../Dashboard/TitleBar";
 import "font-awesome/css/font-awesome.css";
 import axios from "axios";
 
 const BoardView = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const user_name = location.state.user_name;
   const board_id = location.state.board_id;
-  const boardData = location.state.boardData;
-
-  console.log(user_name);
-
+  const [boardData,setBoardData]=useState([]);
   const [taskData, setTaskData] = useState([]);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -23,13 +20,16 @@ const BoardView = () => {
           `http://127.0.0.1:8000/${user_name}/${board_id}/board_details`
         );
         setTaskData(res.data.data.task_list);
-        console.log(res);
+        setBoardData(res.data.data.board_list);
       } catch (e) {
         console.log(e);
       }
     }
     fetchData();
   });
+
+  
+
 
   const TaskBoard = taskData.map((ele) => {
     return (
@@ -91,7 +91,8 @@ const BoardView = () => {
 
   return (
     <div className="m-0">
-      <TitleBar user_name={user_name} boardData={boardData} />
+      <TitleBar user_name={user_name} board_id={board_id} boardData={boardData} />
+      
       <div className="board_view_body mx-5">
         <Table>
           <thead>
@@ -105,7 +106,7 @@ const BoardView = () => {
         </Table>
 
         <div id="tasktable_div">
-          <Table striped bordered hover responsive>
+          <Table striped bordered responsive>
             <tbody>{TaskBoard}</tbody>
           </Table>
         </div>

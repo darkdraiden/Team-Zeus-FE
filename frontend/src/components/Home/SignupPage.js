@@ -24,6 +24,7 @@ function SignupPage() {
       setUserEmail("");
       setUserName("");
       setPassword("");
+      alert("Successfully Registered ! ");
     }
     catch(e){
       navigate("/");
