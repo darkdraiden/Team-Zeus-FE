@@ -17,14 +17,14 @@ function Dashboard(props) {
         let res = await axios.get(
           `http://127.0.0.1:8000/${user_name}/dashboard`
         );
-        setBoardData(res.data.data.boards);
+        setBoardData(res.data.data.board_list);
+
       } catch (e) {
         console.log(e);
       }
     }
     fetchData();
-  },[]);
-
+  });
 
   return (
     <>

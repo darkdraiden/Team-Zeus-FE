@@ -18,6 +18,7 @@ function LoginPage() {
       });
       setUserName("");
       setPassword("");
+    
       if (res.data.success) {
         navigate(`/${user_name}/dashboard`, {
           state: { user_name: user_name },
