@@ -1,11 +1,12 @@
 import React, { useState , useEffect} from "react";
 import "bootstrap/dist/js/bootstrap.min.js";
 import AddBoardModal from "./AddBoardModal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddTaskModal from "./AddTaskModal";
 import axios from "axios";
 
 function TitleBar(props) {
+  const navigate=new useNavigate();
   const [addModalShow, setAddModalShow] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [addTaskModalShow, setAddTaskModalShow] = useState(false);
@@ -27,7 +28,7 @@ function TitleBar(props) {
     };
 
     fetchPeopleList();
-  }, [props.user_name, props.board_id]);
+  }, [isJoined,board_id]);
 
   useEffect(() => {
     async function fetchData() {
@@ -37,13 +38,13 @@ function TitleBar(props) {
         );
         setIsJoined(res.data.data.bool);
         setBoardId(res.data.data.board_id);
-        console.log(res);
+
       } catch (e) {
         console.log(e);
       }
     }
     fetchData();
-  });
+  },[isJoined,board_id]);
 
   let handleJoinBoard = async () => {
     try {
@@ -52,7 +53,8 @@ function TitleBar(props) {
         `http://127.0.0.1:8000/${props.user_name}/${board_id}`
       );
       // Update the join status in the state
-      Location.reload(true);
+      // Location.reload(true);
+      setIsJoined(true);
       // console.log(res.data.data.bool);
       // Show an alert after joining the board
       alert(res.data.message);
@@ -63,21 +65,21 @@ function TitleBar(props) {
 
   const board = props.boardData.map((ele) => {
     const boardDetailsUrl = `/${props.user_name}/${ele.board_id}/board_details`;
+
+    const onClickDropdown = ()=>{
+      setBoardId(ele.board_id);
+      navigate(boardDetailsUrl,{ state:{
+        user_name: props.user_name,
+        board_id: ele.board_id,
+        boardData: props.boardData,
+      }});
+    }
+    
     return (
-      <Link
-        to={boardDetailsUrl}
-        state={{
-          user_name: props.user_name,
-          board_id: ele.board_id,
-          boardData: props.boardData,
-        }}
-        className="btn-link"
-        key={ele.board_id}
-      >
-        <li>
-          <button className="btn w-100 h-100 p-0">{ele.board_name}</button>
+    
+        <li key={ele.board_id} className="btn-link"> 
+          <button className="btn w-100 h-100 p-0" onClick={onClickDropdown}>{ele.board_name}</button>
         </li>
-      </Link>
     );
   });
   const handleAdd = (e) => {
@@ -96,6 +98,16 @@ function TitleBar(props) {
     <div id="title-bar">
       <div id="title">
         <div className="btn-group float-left d-flex me-auto">
+        <Link
+            type="button"
+            id="back_btn"
+            className="btn btn-secondary m-0 h-100"
+            to={`/${props.user_name}/dashboard`}
+            state={{user_name:props.user_name}}
+          >
+            <i className="fa fa-arrow-left pe-2"></i>
+            Back
+          </Link>
         <button
             type="button"
             className="btn dropdown-toggle"
@@ -146,11 +158,11 @@ function TitleBar(props) {
 
           {/* Conditionally render Join Board or Joined based on the join status */}
           {isJoined ? (
-            <button className="btn mx-3" disabled>
+            <button className="btn mx-3 join-btn" disabled>
               Joined
             </button>
           ) : (
-            <button className="btn mx-3" onClick={handleJoinBoard}>
+            <button className="btn mx-3 join-btn" onClick={handleJoinBoard}>
               Join Board
             </button>
           )}

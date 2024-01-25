@@ -9,6 +9,7 @@ function SignupPage() {
   const [user_email, setUserEmail] = useState("");
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  
   let handleSubmit = async (e) => {
     e.preventDefault();
     try{

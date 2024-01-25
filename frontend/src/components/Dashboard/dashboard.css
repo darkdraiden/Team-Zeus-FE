@@ -1,56 +1,75 @@
-#body_dashboard{
+#body_dashboard {
   background-color: #cfd8e1;
   padding: 2rem 2rem;
 }
-#dashboard{
-  background: linear-gradient(270deg,#ecc7df,#abd5e8);
+#dashboard {
+  background: linear-gradient(270deg, #ecc7df, #abd5e8);
   box-shadow: 13px 13px 20px #cbced1, -13px 13px 20px #cbced1,
     13px -13px 20px #cbced1, -13px -13px 20px #cbced1;
 }
-.dropdown-menu .btn{
+
+#back_btn {
+  background-color: #fff;
+  color: #596667;
+  /* #71c5c3 */
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  border-radius: 0 20px 20px 0;
+}
+#back_btn:hover{
+  outline: none;
+  border: none;
+  color: black;
+}
+.dropdown-menu .btn {
   outline: none;
   border: none;
 }
-.dropdown-menu .btn:hover{
+.dropdown-menu .btn:hover {
   color: grey;
 }
-#title-bar{
+.dropdown-toggle{
+  outline: none;
+  border: none;
+}
+#title-bar {
   position: relative;
   width: 100%;
   box-shadow: 13px 13px 20px #cbced1, -13px 13px 20px #cbced1,
     13px -13px 20px #cbced1, -13px -13px 20px #cbced1;
 }
-#title::before{
-  content: '';
+#title::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  height:100%;
+  height: 100%;
   background: url("../Home/home_bg2.webp") no-repeat center center/cover;
   opacity: 0.9;
   z-index: -1;
   width: 100%;
 }
-#title{
+#title {
   overflow: visible;
   border-bottom: 0.8px solid #6183a7;
   box-shadow: 13px 13px 20px #dcdbff87, -13px -13px 20px #fff;
 }
-#title .btn-i{
+#title .btn-i {
   border-radius: 100px;
   padding: 0px 6px;
   border: 2px solid black;
 }
-.float-left{
+.float-left {
   position: absolute;
   top: 0;
-  left: 10px;
+  left: 0px;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-.float-right{
+.float-right {
   position: absolute;
   top: 0;
   right: 10px;
@@ -59,7 +78,7 @@
   align-items: center;
 }
 
-#dashboard-body{
+#dashboard-body {
   height: 100%;
   width: 100%;
   background-color: #fdeeee57;
@@ -68,7 +87,7 @@
 #list-body {
   position: relative;
 }
-#list-body #add_board_btn{
+#list-body #add_board_btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -76,7 +95,7 @@
   border-radius: 20px;
   padding: 0.1rem 0.5rem;
 }
-#dashboard_img{
+#dashboard_img {
   width: 90%;
   animation: zoom 2s ease-in-out infinite;
 }
@@ -86,35 +105,34 @@
   }
 }
 
-#dashboard-body>div{
+#dashboard-body > div {
   min-height: 90vh;
 }
 
-#board-row td{
+#board-row td {
   vertical-align: middle;
   background: none;
 }
-#board-row .btn{
+#board-row .btn {
   border: 1px solid #dcdbff87;
   /* background: linear-gradient(90deg,#d2ccd554,#e6e4e4b6); */
   /* background: linear-gradient(60deg,#a4b7df6b,#ffffff97); */
   background-color: white;
   border-radius: 52px;
   color: #c58585;
-  padding: 0.5rem!important;
+  padding: 0.5rem !important;
 }
-#board-row .btn:hover{
+#board-row .btn:hover {
   color: #5c3131c4;
   transition: all ease-in-out 1s 1;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   transform: translate3d(-93px, 0px, 0px);
 }
 
-
-.modal-content::before{
-  content: '';
+.modal-content::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -122,32 +140,31 @@
   height: 100%;
   background: url("../Home/home_bg2.webp") no-repeat center center/cover;
   z-index: -1;
-  border-radius: 14px!important;
+  border-radius: 14px !important;
 }
-.modal-content{
-  background-color: #dcdbff87!important;
-  border-radius: 14px!important;
+.modal-content {
+  background-color: #dcdbff87 !important;
+  border-radius: 14px !important;
 }
-.modal-header{
+.modal-header {
   margin: auto;
   padding: 0;
   padding-top: 0.5rem;
   border-bottom: 0.8px solid #6183a7;
 }
-.btn-close{
+.btn-close {
   position: absolute;
   top: 1.5rem;
   right: 1rem;
 }
-.modal-header p{
+.modal-header p {
   font-size: 1.5rem;
   font-family: "Bree Serif", cursive;
   font-weight: 600;
   color: #6183a7;
 }
 
-
-#board_name{
+#board_name {
   border-radius: 15px;
   font-size: 0.9rem;
   box-shadow: inset 8px 8px 8px #dcdbff87, inset -8px -8px 8px #dcdbff87;
@@ -159,13 +176,13 @@
   background-color: #ffffffd4;
 }
 
-#btn-modal{
+#btn-modal {
   background-color: #ffffff75;
   color: rgb(85, 82, 82);
   padding: 0.2rem 2rem;
 }
-#btn-modal:hover{
+#btn-modal:hover {
   color: #675a5a;
   background-color: #e7cfcf65;
-  outline:  #c0ababf2 solid 0.1rem;
+  outline: #c0ababf2 solid 0.1rem;
 }

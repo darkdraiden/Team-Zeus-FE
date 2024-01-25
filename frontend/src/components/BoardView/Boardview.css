@@ -1,7 +1,10 @@
+
 Table {
   margin-top: 20px;
 }
-
+tr{
+  background: none!important;
+}
 .table-header {
   text-align: center;
 }
@@ -9,6 +12,7 @@ Table {
 .table-cell {
   text-align: center;
   padding: 1rem 0.5rem!important;
+  background: none!important;
 }
 
 .task-box {
@@ -17,6 +21,15 @@ Table {
   background-color: #f8f9fa;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.task-box span{
+  border-radius: 0 0 0 20px;
+}
+.task-box span i{
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  color: rgba(104, 74, 37, 0.554);
+  font-weight: 300;
 }
 
 .tr-first-child div {
@@ -30,6 +43,9 @@ Table {
 }
 .tr-fourth-child div{
   background-color: #fcbdbf45;
+}
+tr div{
+  transition: background-color 200ms linear;
 }
 tr div:hover{
     background-color: white;
@@ -53,4 +69,11 @@ tr div:hover{
   height: 90vh;
   overflow: scroll;
   scroll-behavior: smooth;
+}
+
+.join-btn{
+  outline: none;
+  border: none;
+  background-color: white!important;
+  border-radius: 20px;
 }

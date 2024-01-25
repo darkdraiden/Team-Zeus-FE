@@ -37,7 +37,7 @@ const AddTaskModal = (props) => {
             <Col sm={12}>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="task_name">
-                  <Form.Label className="fs-6 w-100 text-center">
+                  <Form.Label className="fs-6 w-100 mt-4 text-center">
                     Task Name
                   </Form.Label>
                   <div className="board_name_div">
@@ -50,12 +50,12 @@ const AddTaskModal = (props) => {
                   </div>
                 </Form.Group>
                 <Form.Group controlId="task_desc">
-                  <Form.Label className="fs-6 w-100 text-center">
-                    Task Desc
+                  <Form.Label className="fs-6 w-100 mt-4 text-center">
+                    Task Description
                   </Form.Label>
                   <div className="board_name_div">
                     <Form.Control
-                      type="text"
+                      type="textarea"
                       name="task_desc"
                       required
                       placeholder=""
@@ -63,7 +63,7 @@ const AddTaskModal = (props) => {
                   </div>
                 </Form.Group>
                 <Form.Group>
-                  <p className="mt-4 w-100 text-center">
+                  <p className="mt-5 w-100 text-center">
                     <Button id="btn-modal" variant="default" type="submit">
                       Submit
                     </Button>

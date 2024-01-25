@@ -36,7 +36,10 @@ const BoardView = () => {
       <tr className="row m-0" key={ele.task_id}>
         <td className="table-cell tr-first-child col-3">
           {ele.task_status === "To Do" ? (
-            <div className="task-box w-100">
+            <div className="task-box w-100 position-relative">
+              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1">
+                <i class="fa fa-arrow-right"></i>
+              </span>
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
@@ -49,7 +52,10 @@ const BoardView = () => {
 
         <td className="table-cell tr-second-child col-3">
           {ele.task_status === "In Progress" ? (
-            <div className="task-box w-100">
+            <div className="task-box w-100 position-relative">
+              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1">
+                <i class="fa fa-arrow-right"></i>
+              </span>
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
@@ -62,7 +68,10 @@ const BoardView = () => {
 
         <td className="table-cell tr-third-child col-3">
           {ele.task_status === "Done" ? (
-            <div className="task-box w-100">
+            <div className="task-box w-100 position-relative">
+              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1">
+                <i class="fa fa-arrow-right"></i>
+              </span>
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
@@ -75,7 +84,10 @@ const BoardView = () => {
 
         <td className="table-cell tr-fourth-child col-3">
           {ele.task_status === "Cancelled" ? (
-            <div className="task-box w-100">
+            <div className="task-box w-100 position-relative">
+              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1">
+                <i class="fa fa-arrow-right"></i>
+              </span>
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
