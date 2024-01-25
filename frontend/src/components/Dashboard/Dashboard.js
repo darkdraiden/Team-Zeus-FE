@@ -24,7 +24,7 @@ function Dashboard(props) {
       }
     }
     fetchData();
-  });
+  },[]);
 
   return (
     <div id="body_dashboard">

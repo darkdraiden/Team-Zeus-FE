@@ -21,7 +21,7 @@ function LoginPage() {
     
       if (res.data.success) {
         navigate(`/${user_name}/dashboard`, {
-          state: { user_name: user_name },
+          state: { user_name: user_name }
         });
       } else {
         alert("Invalid Credentials !");
