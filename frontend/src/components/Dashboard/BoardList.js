@@ -20,6 +20,7 @@ function BoardList(props) {
               user_name: user_name,
               board_id: ele.board_id,
               boardData: boards_list,
+              board_name:ele.board_name
             }}
             className="btn-link"
           >

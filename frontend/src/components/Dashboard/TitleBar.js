@@ -52,11 +52,9 @@ function TitleBar(props) {
       let res = await axios.get(
         `http://127.0.0.1:8000/${props.user_name}/${board_id}`
       );
+
       // Update the join status in the state
-      // Location.reload(true);
       setIsJoined(true);
-      // console.log(res.data.data.bool);
-      // Show an alert after joining the board
       alert(res.data.message);
     } catch (error) {
       console.error("Error joining board:", error);
@@ -72,6 +70,7 @@ function TitleBar(props) {
         user_name: props.user_name,
         board_id: ele.board_id,
         boardData: props.boardData,
+        board_name:ele.board_name
       }});
     }
     
@@ -105,8 +104,7 @@ function TitleBar(props) {
             to={`/${props.user_name}/dashboard`}
             state={{user_name:props.user_name}}
           >
-            <i className="fa fa-arrow-left pe-2"></i>
-            Back
+            Home
           </Link>
         <button
             type="button"
