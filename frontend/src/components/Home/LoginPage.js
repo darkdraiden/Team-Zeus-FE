@@ -22,8 +22,9 @@ function LoginPage() {
       setPassword("");
 
       if (res.data.success) {
+        document.cookie=`session_id=${res.data.session_id}`;
         navigate(`/${user_name}/dashboard`, {
-          state: { user_name: user_name },
+          state: { user_name:user_name }
         });
       } else {
         alert("Invalid Credentials !");

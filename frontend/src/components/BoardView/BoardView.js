@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "./Boardview.css";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import TitleBar from "../Dashboard/TitleBar";
 import "font-awesome/css/font-awesome.css";
 import axios from "axios";
 
 const BoardView = () => {
+  const navigate= useNavigate();
   const location = useLocation();
   const user_name = location.state.user_name;
   const board_id = location.state.board_id;
   const board_name = location.state.board_name;
   const [boardData, setBoardData] = useState([]);
   const [taskData, setTaskData] = useState([]);
-  const [isJoined, setIsJoined]=useState(false);
+  const [isJoined, setIsJoined] = useState(false);
   const statusList = ["To Do", "In Progress", "Done", "Cancelled"];
   useEffect(() => {
     async function fetchData() {
       try {
-        let res = await axios.get(
-          `http://127.0.0.1:8000/${user_name}/${board_id}/board_details`
+        let session_key = document.cookie.match(/session_id=([^;]*)/);
+        let res = await axios.post(
+          `http://127.0.0.1:8000/${user_name}/${board_id}/board_details`,
+          {
+            session_key: session_key[1],
+          }
         );
+        if (!res.data.success) {
+          alert(res.data.message);
+          navigate("/");
+        }
         setTaskData(res.data.data.task_list);
         setBoardData(res.data.data.board_list);
         setIsJoined(res.data.data.bool);
       } catch (e) {
-        console.log(e);
+        navigate('/');
       }
     }
     fetchData();
@@ -49,7 +58,7 @@ const BoardView = () => {
     const status = statusList.map((status_str) => {
       return (
         <>
-          <li className="btn-link">
+          <li className="btn-link" >
             <button
               className="btn w-100 h-100 p-0"
               onClick={() => onClickStatusDropdown(ele.task_id, status_str)}
@@ -62,10 +71,10 @@ const BoardView = () => {
     });
 
     const assignTask = async (task_id) => {
-      if(!isJoined) {
+      if (!isJoined) {
         alert("Can't Assign. You Have not joined the Board !");
         return;
-      } 
+      }
       try {
         let res = await axios.put(
           `http://127.0.0.1:8000/${user_name}/${board_id}/${task_id}/assign`
@@ -211,7 +220,6 @@ const BoardView = () => {
 
   return (
     <div className="m-0">
-
       <TitleBar
         user_name={user_name}
         board_id={board_id}
