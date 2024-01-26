@@ -9,6 +9,8 @@ function LoginPage() {
   const navigate = useNavigate();
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -18,10 +20,10 @@ function LoginPage() {
       });
       setUserName("");
       setPassword("");
-    
+
       if (res.data.success) {
         navigate(`/${user_name}/dashboard`, {
-          state: { user_name: user_name }
+          state: { user_name: user_name },
         });
       } else {
         alert("Invalid Credentials !");
@@ -30,6 +32,22 @@ function LoginPage() {
     } catch (e) {
       alert("Invalid Credentials !");
       navigate("/");
+    }
+  };
+
+  const password_show_hide=() =>{
+    var x = document.getElementById("password");
+    var show_eye = document.getElementById("show_eye");
+    var hide_eye = document.getElementById("hide_eye");
+    hide_eye.classList.remove("d-none");
+    if (x.type === "password") {
+      x.type = "text";
+      show_eye.style.display = "none";
+      hide_eye.style.display = "block";
+    } else {
+      x.type = "password";
+      show_eye.style.display = "block";
+      hide_eye.style.display = "none";
     }
   };
   return (
@@ -45,6 +63,7 @@ function LoginPage() {
             id="user_name"
             placeholder="Username"
             onChange={(e) => setUserName(e.target.value)}
+            required
           />
         </div>
         <div className="form-field d-flex align-items-center">
@@ -56,7 +75,14 @@ function LoginPage() {
             id="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
+          <div className="d-flex justify-content-center">
+            <span className="pe-2" onClick={password_show_hide}>
+              <i className="fa fa-eye" id="show_eye"></i>
+              <i className="fa fa-solid fa-eye-slash d-none" id="hide_eye"></i>
+            </span>
+          </div>
         </div>
         <button className="btn mt-3" type="submit">
           Login

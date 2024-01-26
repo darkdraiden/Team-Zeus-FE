@@ -47,8 +47,8 @@ function Home() {
                 <div>
                   <LoginPage />
                   <div className="text-center last_login fs-6">
-                    <button className="last_login_btn">Forgot password?</button>
-                    <p className="m-0 fs-6">or</p>
+                    {/* <button className="last_login_btn">Forgot password?</button> */}
+                    {/* <p className="m-0 fs-6">or</p> */}
                     <div>
                       <span>Not an existing User ? </span>
                     </div>
