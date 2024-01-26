@@ -33,9 +33,16 @@ function TitleBar(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        let res = await axios.get(
+        let session_key = document.cookie.match(/session_id=([^;]*)/);
+        let res = await axios.post(
           `http://127.0.0.1:8000/${props.user_name}/${board_id}/board_details`
-        );
+        ,{
+          session_key: session_key[1],
+        });
+        if (!res.data.success) {
+          alert(res.data.message);
+          navigate("/");
+        }
         setIsJoined(res.data.data.bool);
         setBoardId(res.data.data.board_id);
 
