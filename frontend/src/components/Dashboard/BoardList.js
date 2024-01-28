@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import dashboard_img from "../../imgs/home_bg.svg";
+import dashboard_img from "../../imgs/sneat.png";
 import AddBoardModal from "./AddBoardModal";
 
 function BoardList(props) {
-  const user_name = props.user_name;
+  let session = document.cookie.match(/user_name=([^;]*)/);
+  let user_name = session[1];
   const boards_list = props.boardData;
   const [addModalShow, setAddModalShow] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -20,7 +21,7 @@ function BoardList(props) {
               user_name: user_name,
               board_id: ele.board_id,
               boardData: boards_list,
-              board_name:ele.board_name
+              board_name: ele.board_name,
             }}
             className="btn-link"
           >
@@ -40,12 +41,33 @@ function BoardList(props) {
   return (
     <div>
       <div id="dashboard-body" className="row mx-0 p-0">
-        <div className="col-lg-7 d-flex justify-content-center align-items-center">
-          <img srcSet={dashboard_img} id="dashboard_img" alt="" />
+        <div className="boardlist-heading col-lg-6 d-flex flex-column text-center justify-content-center align-items-center">
+          <h1>Welcome {user_name} &nbsp;🎉</h1>
+          <span>
+            Let's Join hands in managing tasks together. <br />
+            Have a Look at These Boards !
+          </span>
+          <div className="col-sm-4 my-5 d-flex justify-content-center align-items-center">
+              <img
+                src={dashboard_img}
+                className="img img-responsive"
+                width={"300px"}
+                alt="sneat"
+                srcset=""
+                id="img_sneat"
+              />
+            </div>
         </div>
-        <div id="list-body" className="col-lg-5 d-flex justify-content-center align-items-center">
+        <div
+          id="list-body"
+          className="col-lg-6 d-flex justify-content-center align-items-center"
+        >
           <div className="col-lg-7 my-2">
-            <button id="add_board_btn" className="btn btn-i" onClick={handleAdd}>
+            <button
+              id="add_board_btn"
+              className="btn btn-i"
+              onClick={handleAdd}
+            >
               <i className="fa fa-plus-circle pe-2"></i>
               Add Board
             </button>

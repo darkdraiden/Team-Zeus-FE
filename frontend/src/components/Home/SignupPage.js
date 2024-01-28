@@ -124,10 +124,7 @@ function SignupPage() {
             </span>
           </div>
         </div>
-        <button className="btn mt-3" onClick={(e)=>{
-          // setIsValidEmail(ValidateEmail(document.form.user_email))
-          // setIsValidPassword(ValidatePassword(document.form.password))}
-        }} type="submit">
+        <button className="btn mt-3" type="submit">
           Register
         </button>
       </form>

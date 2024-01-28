@@ -3,12 +3,13 @@ import { Modal, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 const AddTaskModal = (props) => {
-
+  let session = document.cookie.match(/user_name=([^;]*)/);
+  let user_name=session[1];
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://127.0.0.1:8000/${props.user_name}/${props.board_id}/addtask`, {
+      .post(`http://127.0.0.1:8000/${user_name}/${props.board_id}/addtask`, {
         task_name: e.target.task_name.value,
         task_desc: e.target.task_desc.value
 

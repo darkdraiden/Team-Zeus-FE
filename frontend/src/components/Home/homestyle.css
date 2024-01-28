@@ -1,5 +1,5 @@
 h1 {
-  font-size: 4rem;
+  font-size: 3.9rem;
   font-family: "Grape Nuts", cursive;
   font-weight: 600;
   color: #6183a7;
@@ -20,7 +20,6 @@ p {
   position: relative;
   min-height: 100vh;
   background-color: #dcdbff87;
-  /* border-radius: 0 0 4rem 4rem; */
   box-shadow: 13px 13px 20px #cbced1, -13px 13px 20px #cbced1,
     13px -13px 20px #cbced1, -13px -13px 20px #cbced1;
 }
@@ -93,6 +92,25 @@ nav {
     }
     
 }
+@media only screen and (max-width: 1000px) {
+  
+    #Home{
+        margin: 0;
+    }
+    #Home_body{  
+        height: max-content;
+    }
+    .wrapper{
+        width: 70%!important;
+        padding: 40px;
+    }
+    
+}
+@media only screen and (max-width: 800px) {
+  .wrapper{
+    width: 90%!important;
+  }
+}
 @media only screen and (max-width: 600px) {
     html{
         font-size: 15px;
@@ -125,4 +143,18 @@ nav {
     #Home h1{
         font-size: 3.5rem;
     }
+    .fa{
+      padding: 10px!important;
+    }
+    .wrapper #password,#user_name{
+      padding: 10px 4px;
+    }
+
+}
+
+@media only screen and (max-width: 300px) {
+  .wrapper{
+    width: 100%!important;
+    padding: 30px 0px;
+  }
 }

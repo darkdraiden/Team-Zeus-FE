@@ -3,10 +3,12 @@ import { Modal, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 const AddBoardModal = (props) => {
+  let session = document.cookie.match(/user_name=([^;]*)/);
+  let user_name=session[1];
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://127.0.0.1:8000/${props.user_name}/addboard`, {
+      .post(`http://127.0.0.1:8000/${user_name}/addboard`, {
         board_name: e.target.board_name.value,
       })
       .then((response) => response.data)
