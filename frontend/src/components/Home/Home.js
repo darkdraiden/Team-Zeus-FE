@@ -32,7 +32,7 @@ function Home() {
         </div>
       </nav>
       <section id="Home_body" className="d-flex align-items-center">
-        <div className="row mx-2 p-0 h-100">
+        <div className="row mx-2 mb-5 p-0 h-100">
           <div className="col-lg-6 p-3 d-flex justify-content-center align-items-center flex-column">
             <h1 className="mb-4 text-center">Task Manager</h1>
             <h2 className="mb-2 text-center">Project management made easy</h2>

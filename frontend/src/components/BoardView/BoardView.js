@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
 import "./Boardview.css";
 import { useLocation, useNavigate } from "react-router";
 import TitleBar from "../Dashboard/TitleBar";
@@ -7,9 +6,10 @@ import "font-awesome/css/font-awesome.css";
 import axios from "axios";
 
 const BoardView = () => {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
-  const user_name = location.state.user_name;
+  let session = document.cookie.match(/user_name=([^;]*)/);
+  let user_name = session[1];
   const board_id = location.state.board_id;
   const board_name = location.state.board_name;
   const [boardData, setBoardData] = useState([]);
@@ -34,7 +34,7 @@ const BoardView = () => {
         setBoardData(res.data.data.board_list);
         setIsJoined(res.data.data.bool);
       } catch (e) {
-        navigate('/');
+        navigate("/");
       }
     }
     fetchData();
@@ -58,7 +58,7 @@ const BoardView = () => {
     const status = statusList.map((status_str) => {
       return (
         <>
-          <li className="btn-link" >
+          <li className="btn-link">
             <button
               className="btn w-100 h-100 p-0"
               onClick={() => onClickStatusDropdown(ele.task_id, status_str)}
@@ -86,8 +86,8 @@ const BoardView = () => {
     };
 
     return (
-      <tr className="row m-0" key={ele.task_id}>
-        <td className="table-cell tr-first-child col-3">
+      <tr className="p-0 m-0" key={ele.task_id}>
+        <td className="table-cell tr-first-child">
           {ele.task_status === "To Do" ? (
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
@@ -102,7 +102,7 @@ const BoardView = () => {
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to != "Not assigned" ? (
+              {ele.assigned_to !== "Not assigned" ? (
                 <>
                   <i className="fa fa-check-circle disabled"></i>
                   <p>Assigned to : {ele.assigned_to}</p>
@@ -119,7 +119,7 @@ const BoardView = () => {
           )}
         </td>
 
-        <td className="table-cell tr-second-child col-3">
+        <td className="table-cell tr-second-child">
           {ele.task_status === "In Progress" ? (
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
@@ -134,7 +134,7 @@ const BoardView = () => {
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to != "Not assigned" ? (
+              {ele.assigned_to !== "Not assigned" ? (
                 <>
                   <i className="fa fa-check-circle disabled"></i>
                   <p>Assigned to : {ele.assigned_to}</p>
@@ -151,7 +151,7 @@ const BoardView = () => {
           )}
         </td>
 
-        <td className="table-cell tr-third-child col-3">
+        <td className="table-cell tr-third-child">
           {ele.task_status === "Done" ? (
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
@@ -166,7 +166,7 @@ const BoardView = () => {
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to != "Not assigned" ? (
+              {ele.assigned_to !== "Not assigned" ? (
                 <>
                   <i className="fa fa-check-circle disabled"></i>
                   <p>Assigned to : {ele.assigned_to}</p>
@@ -183,7 +183,7 @@ const BoardView = () => {
           )}
         </td>
 
-        <td className="table-cell tr-fourth-child col-3">
+        <td className="table-cell tr-fourth-child">
           {ele.task_status === "Cancelled" ? (
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
@@ -198,7 +198,7 @@ const BoardView = () => {
               <h4>{ele.task_name}</h4>
               <p>{ele.task_desc}</p>
               <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to != "Not assigned" ? (
+              {ele.assigned_to !== "Not assigned" ? (
                 <>
                   <i className="fa fa-check-circle disabled"></i>
                   <p>Assigned to : {ele.assigned_to}</p>
@@ -219,30 +219,34 @@ const BoardView = () => {
   });
 
   return (
-    <div className="m-0">
-      <TitleBar
-        user_name={user_name}
-        board_id={board_id}
-        boardData={boardData}
-      />
+    <div className="board_view_outer">
+      <div className="board_view">
+        <TitleBar
+          user_name={user_name}
+          board_id={board_id}
+          boardData={boardData}
+        />
 
-      <div className="board_view_body mx-5">
-        <h2 className="mt-4 text-center">{board_name}</h2>
-        <Table>
-          <thead>
-            <tr className="row">
-              <th className="table-header col-3">To Do</th>
-              <th className="table-header col-3">In Progress</th>
-              <th className="table-header col-3">Done</th>
-              <th className="table-header col-3">Cancelled</th>
-            </tr>
-          </thead>
-        </Table>
-
-        <div id="tasktable_div">
-          <Table striped bordered responsive>
-            <tbody>{TaskBoard}</tbody>
-          </Table>
+        <div className="board_view_body mx-5">
+          <h4 className="mb-2 mt-3 text-center">{board_name}</h4>
+          <div className="d-flex mt-4 justify-content-center">
+            <div id="tasktable_div" className="center-block scroll-inner fix-width">
+              <table
+                className="table m-0 table-bordered table-striped"
+                id="task-table"
+              >
+                <thead>
+                  <tr className="m-0">
+                    <th className="table-cell">To Do</th>
+                    <th className="table-cell">In Progress</th>
+                    <th className="table-cell">Done</th>
+                    <th className="table-cell">Cancelled</th>
+                  </tr>
+                </thead>
+                <tbody>{TaskBoard}</tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

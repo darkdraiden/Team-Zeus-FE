@@ -23,6 +23,7 @@ function LoginPage() {
 
       if (res.data.success) {
         document.cookie=`session_id=${res.data.session_id}`;
+        document.cookie=`user_name=${res.data.user_name}`;
         navigate(`/${user_name}/dashboard`, {
           state: { user_name:user_name }
         });

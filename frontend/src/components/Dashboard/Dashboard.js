@@ -5,21 +5,22 @@ import "font-awesome/css/font-awesome.css";
 import { useLocation , useNavigate} from "react-router";
 import BoardList from "./BoardList";
 
-function Dashboard(props) {
+function Dashboard() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const user_name = location.state.user_name;
   const [boardData, setBoardData] = useState([]);
+  let user_name="";
 
   useEffect(() => {
     async function fetchData() {
       try {
         let session_key = document.cookie.match(/session_id=([^;]*)/);
+        let session = document.cookie.match(/user_name=([^;]*)/);
+        user_name=session[1];
         let res = await axios.post(
           `http://127.0.0.1:8000/${user_name}/dashboard`,
           {
-            session_key: session_key[1],
-          }
+            session_key: session_key[1]
+          } 
         );
 
         if (!res.data.success) {
@@ -33,7 +34,7 @@ function Dashboard(props) {
       }
     }
     fetchData();
-  });
+  },[]);
 
   return (
     <div id="body_dashboard">

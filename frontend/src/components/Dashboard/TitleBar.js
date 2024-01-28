@@ -103,6 +103,11 @@ function TitleBar(props) {
   return (
     <div id="title-bar">
       <div id="title">
+      <div className="float-right">
+          <button className="btn btn-i">
+            <i className="fa fa-user"></i>
+          </button>
+        </div>
         <div className="btn-group float-left d-flex me-auto">
         <Link
             type="button"
@@ -144,7 +149,7 @@ function TitleBar(props) {
             setupdated={setIsUpdated}
           ></AddTaskModal>
         </div>
-        <div className="text-center">
+        <div className="text-center float-between">
           {/* <!-- Default dropstart button --> */}
           <div className="btn-group dropstart">
             <button
@@ -178,11 +183,7 @@ function TitleBar(props) {
           ></AddBoardModal>
         </div>
 
-        <div className="float-right">
-          <button className="btn btn-i">
-            <i className="fa fa-user"></i>
-          </button>
-        </div>
+        
       </div>
     </div>
   );

@@ -1,29 +1,62 @@
+.board_view_outer{
+  background-color: #dcdbff87;
+  height: max-content;
+}
+.board_view{
+    background-color: #faf4f436;
+    height: 100%;
+}
 
-Table {
-  margin-top: 20px;
+#task-table {
+  min-width: 900px!important;
+  height: max-content;
+  margin: 20px auto;
+  max-width: none;
+  background-color: rgba(249, 246, 249, 0.57);
+}
+.fix-width {
+	width: 100vw;
+  height: 90vh;
+	overflow:scroll;
 }
 tr{
   background: none!important;
 }
 .table-header {
   text-align: center;
+  width: 25%!important;
 }
 
+thead{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  opacity: 1;
+}
+thead td{
+  z-index: 0;
+}
+thead th{
+  padding: 0.5rem!important;
+}
 .table-cell {
   text-align: center;
-  padding: 1rem 0.5rem!important;
   background: none!important;
+  width: 25%!important;
+  font-size: 0.9rem;
 }
 
 .task-box {
   border: 1px solid #ddd;
   padding: 15px;
-  background-color: #f8f9fa;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .task-box span{
   border-radius: 0 0 0 20px;
+
 }
 .task-box span i{
   font-size: 0.8rem;
@@ -32,33 +65,22 @@ tr{
   font-weight: 300;
 }
 
-.tr-first-child div {
-  background-color: #71c5c445;
-}
-.tr-second-child div {
-  background-color: #c1e0da41;
-}
-.tr-third-child div {
-  background-color: #f8e7db9b;
-}
-.tr-fourth-child div{
-  background-color: #fcbdbf45;
-}
+
 tr div{
   transition: background-color 200ms linear;
 }
 tr div:hover{
-    background-color: white;
+    background: none;
 }
 
 .task-box h4 {
   margin-bottom: 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .task-box p {
   margin-bottom: 8px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .task-box .time {
@@ -66,9 +88,26 @@ tr div:hover{
 }
 
 #tasktable_div {
-  height: 90vh;
-  overflow: scroll;
   scroll-behavior: smooth;
+  background-color: rgba(255, 255, 255, 0.364);
+  box-shadow: inset 13px 13px 20px #cbced1, inset -13px 13px 20px #cbced1,
+  13px -13px 20px #cbced1, inset -13px -13px 20px #cbced1;
+}
+.scroll-inner {
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+	&::-webkit-scrollbar:horizontal {
+		height: 5px;
+	}
+	&::-webkit-scrollbar-track {
+		background-color: transparentize(#cccccc, 0.7);
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background: transparentize(#ccc, 0.5);
+		box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	}
 }
 
 .join-btn{
@@ -76,4 +115,20 @@ tr div:hover{
   border: none;
   background-color: white!important;
   border-radius: 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+  html{
+      font-size: 15px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  html{
+      font-size: 18px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  html{
+      font-size: 14px;
+  }
 }
