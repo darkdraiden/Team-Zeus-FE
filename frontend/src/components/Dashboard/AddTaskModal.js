@@ -2,19 +2,22 @@ import React,{useEffect} from "react";
 import { Modal, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate} from "react-router";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AddTaskModal = (props) => {
   const navigate = useNavigate();
   let session = document.cookie.match(/user_name=([^;]*)/);
   useEffect(() => {
     async function fetchData() {
       if (session===null){
-        console.log("hello")
-        console.log(session)
+        console.log(session);
         navigate("/");
       }
     }
     fetchData();
   },[]);
+
   let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,11 +30,12 @@ const AddTaskModal = (props) => {
       .then((response) => response.data)
       .then(
         (result) => {
-          alert("Successfully added board");
+          toast.success("Successfully added board");
           props.setupdated(true);
+          props.onHide();
         },
         (error) => {
-          alert("Unsuccessfull in adding board");
+          toast.error("Unsuccessful in adding board");
         }
       );
   };

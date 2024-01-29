@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./dashboard.css";
 import "font-awesome/css/font-awesome.css";
-import { useLocation , useNavigate} from "react-router";
+import { useNavigate} from "react-router";
 import BoardList from "./BoardList";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ function Dashboard() {
           } 
         );
         if (!res.data.success) {
-          alert(res.data.message);
+          toast(res.data.message);
           navigate("/");
         }
 
@@ -35,10 +37,22 @@ function Dashboard() {
       }
     }
     fetchData();
-  },[]);
+  });
   let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
   return (
     <div id="body_dashboard">
+      <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
       <div id="dashboard">
         <BoardList user_name={user_name} boardData={boardData} />
       </div>

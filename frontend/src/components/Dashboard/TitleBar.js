@@ -1,12 +1,14 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/js/bootstrap.min.js";
 import AddBoardModal from "./AddBoardModal";
 import { Link, useNavigate } from "react-router-dom";
 import AddTaskModal from "./AddTaskModal";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TitleBar(props) {
-  const navigate=new useNavigate();
+  const navigate = new useNavigate();
   const [addModalShow, setAddModalShow] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [addTaskModalShow, setAddTaskModalShow] = useState(false);
@@ -15,7 +17,6 @@ function TitleBar(props) {
   const [peopleList, setPeopleList] = useState([]);
 
   useEffect(() => {
-    // Fetch list of people when the component mounts
     const fetchPeopleList = async () => {
       try {
         const response = await axios.get(
@@ -28,30 +29,30 @@ function TitleBar(props) {
     };
 
     fetchPeopleList();
-  }, [isJoined,board_id]);
+  }, [isJoined, board_id]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         let session_key = document.cookie.match(/session_id=([^;]*)/);
         let res = await axios.post(
-          `http://127.0.0.1:8000/${props.user_name}/${board_id}/board_details`
-        ,{
-          session_key: session_key[1],
-        });
+          `http://127.0.0.1:8000/${props.user_name}/${board_id}/board_details`,
+          {
+            session_key: session_key[1],
+          }
+        );
         if (!res.data.success) {
-          alert(res.data.message);
+          toast.error(res.data.message);
           navigate("/");
         }
         setIsJoined(res.data.data.bool);
         setBoardId(res.data.data.board_id);
-
       } catch (e) {
         console.log(e);
       }
     }
     fetchData();
-  },[isJoined,board_id]);
+  }, [isJoined, board_id]);
 
   let handleJoinBoard = async () => {
     try {
@@ -59,33 +60,36 @@ function TitleBar(props) {
       let res = await axios.get(
         `http://127.0.0.1:8000/${props.user_name}/${board_id}`
       );
-
+      toast.success(res.data.message);
       // Update the join status in the state
       setIsJoined(true);
-      alert(res.data.message);
+      
     } catch (error) {
-      console.error("Error joining board:", error);
+      toast.error("Error joining board");
     }
   };
 
   const board = props.boardData.map((ele) => {
     const boardDetailsUrl = `/${props.user_name}/${ele.board_id}/board_details`;
 
-    const onClickDropdown = ()=>{
+    const onClickDropdown = () => {
       setBoardId(ele.board_id);
-      navigate(boardDetailsUrl,{ state:{
-        user_name: props.user_name,
-        board_id: ele.board_id,
-        boardData: props.boardData,
-        board_name:ele.board_name
-      }});
-    }
-    
+      navigate(boardDetailsUrl, {
+        state: {
+          user_name: props.user_name,
+          board_id: ele.board_id,
+          boardData: props.boardData,
+          board_name: ele.board_name,
+        },
+      });
+    };
+
     return (
-    
-        <li key={ele.board_id} className="btn-link"> 
-          <button className="btn w-100 h-100 p-0" onClick={onClickDropdown}>{ele.board_name}</button>
-        </li>
+      <li key={ele.board_id} className="btn-link">
+        <button className="btn w-100 h-100 p-0" onClick={onClickDropdown}>
+          {ele.board_name}
+        </button>
+      </li>
     );
   });
   const handleAdd = (e) => {
@@ -99,29 +103,42 @@ function TitleBar(props) {
 
   let AddTaskModalClose = () => setAddTaskModalShow(false);
   let AddModalClose = () => setAddModalShow(false);
-
+  const handleLogout = async () => {
+    try {
+      let session_key = document.cookie.match(/session_id=([^;]*)/);
+      let temp = session_key[1];
+      document.cookie = `session_id=${session_key}; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/;`;
+      
+      let res = await axios.post(
+        `http://127.0.0.1:8000/${props.user_name}/logout`,
+        {
+          session_key: temp,
+        }
+      );
+      toast.success("Logged Out !");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div id="title-bar">
       <div id="title">
-      <div className="float-right">
-          <button className="btn btn-i" onClick={(e)=>{
-            let session_key = document.cookie.match(/session_id=([^;]*)/);
-            document.cookie = `session_id=${session_key}; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/;`;
-          }}>
+        <div className="float-right">
+          <button className="btn btn-i" onClick={handleLogout}>
             <i className="fa fa-sign-out"></i>
           </button>
         </div>
         <div className="btn-group float-left d-flex me-auto">
-        <Link
+          <Link
             type="button"
             id="back_btn"
             className="btn btn-secondary m-0 h-100"
             to={`/${props.user_name}/dashboard`}
-            state={{user_name:props.user_name}}
+            state={{ user_name: props.user_name }}
           >
             Home
           </Link>
-        <button
+          <button
             type="button"
             className="btn dropdown-toggle"
             data-bs-toggle="dropdown"
@@ -131,15 +148,13 @@ function TitleBar(props) {
           </button>
           <ul className="dropdown-menu p-1">
             {peopleList.map((person) => (
-              <Link
-              to={'/'}
-              className="btn-link"
-              key={person.user_name}
-            >
-              <li>
-                <button className="btn w-100 h-100 p-0">{person.user_name}</button>
-              </li>
-            </Link>
+              <Link to={"/"} className="btn-link" key={person.user_name}>
+                <li>
+                  <button className="btn w-100 h-100 p-0">
+                    {person.user_name}
+                  </button>
+                </li>
+              </Link>
             ))}
           </ul>
           <button className="btn" onClick={handleAddTask}>
@@ -185,8 +200,6 @@ function TitleBar(props) {
             setupdated={setIsUpdated}
           ></AddBoardModal>
         </div>
-
-        
       </div>
     </div>
   );
