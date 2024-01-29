@@ -1,11 +1,21 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Modal, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
-
+import { useNavigate} from "react-router";
 const AddTaskModal = (props) => {
+  const navigate = useNavigate();
   let session = document.cookie.match(/user_name=([^;]*)/);
-  let user_name=session[1];
-
+  useEffect(() => {
+    async function fetchData() {
+      if (session===null){
+        console.log("hello")
+        console.log(session)
+        navigate("/");
+      }
+    }
+    fetchData();
+  },[]);
+  let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -25,6 +35,7 @@ const AddTaskModal = (props) => {
         }
       );
   };
+
   return (
     <div className="Container" id="modal">
       <Modal {...props}>

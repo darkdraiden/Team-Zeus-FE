@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import dashboard_img from "../../imgs/sneat.png";
 import AddBoardModal from "./AddBoardModal";
-
+import { useNavigate} from "react-router";
 function BoardList(props) {
+  const navigate = useNavigate();
   let session = document.cookie.match(/user_name=([^;]*)/);
-  let user_name = session[1];
+  let user_name=props.user_name;
   const boards_list = props.boardData;
   const [addModalShow, setAddModalShow] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -42,7 +43,7 @@ function BoardList(props) {
     <div>
       <div id="dashboard-body" className="row mx-0 p-0">
         <div className="boardlist-heading col-lg-6 d-flex flex-column text-center justify-content-center align-items-center">
-          <h1>Welcome {user_name} &nbsp;🎉</h1>
+          <h1>Welcome {user_name}</h1>
           <span>
             Let's Join hands in managing tasks together. <br />
             Have a Look at These Boards !
@@ -53,7 +54,7 @@ function BoardList(props) {
                 className="img img-responsive"
                 width={"300px"}
                 alt="sneat"
-                srcset=""
+                srcSet=""
                 id="img_sneat"
               />
             </div>

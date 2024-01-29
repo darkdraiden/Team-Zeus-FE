@@ -4,6 +4,9 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import BoardView from './components/BoardView/BoardView'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
+
+  
+
   return (
     <div className="App">
       <BrowserRouter>
