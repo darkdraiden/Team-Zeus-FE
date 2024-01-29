@@ -104,8 +104,11 @@ function TitleBar(props) {
     <div id="title-bar">
       <div id="title">
       <div className="float-right">
-          <button className="btn btn-i">
-            <i className="fa fa-user"></i>
+          <button className="btn btn-i" onClick={(e)=>{
+            let session_key = document.cookie.match(/session_id=([^;]*)/);
+            document.cookie = `session_id=${session_key}; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/;`;
+          }}>
+            <i className="fa fa-sign-out"></i>
           </button>
         </div>
         <div className="btn-group float-left d-flex me-auto">

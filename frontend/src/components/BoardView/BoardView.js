@@ -8,14 +8,24 @@ import axios from "axios";
 const BoardView = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  let session = document.cookie.match(/user_name=([^;]*)/);
-  let user_name = session[1];
   const board_id = location.state.board_id;
   const board_name = location.state.board_name;
   const [boardData, setBoardData] = useState([]);
   const [taskData, setTaskData] = useState([]);
   const [isJoined, setIsJoined] = useState(false);
   const statusList = ["To Do", "In Progress", "Done", "Cancelled"];
+  let session = document.cookie.match(/user_name=([^;]*)/);
+  useEffect(() => {
+    async function fetchData() {
+      if (session===null){
+        console.log("hello")
+        console.log(session)
+        navigate("/");
+      }
+    }
+    fetchData();
+  },[]);
+  let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
   useEffect(() => {
     async function fetchData() {
       try {
@@ -55,10 +65,10 @@ const BoardView = () => {
       return;
     };
 
-    const status = statusList.map((status_str) => {
+    const status = statusList.map((status_str,index) => {
       return (
         <>
-          <li className="btn-link">
+          <li className="btn-link" key= {index}>
             <button
               className="btn w-100 h-100 p-0"
               onClick={() => onClickStatusDropdown(ele.task_id, status_str)}
@@ -92,6 +102,7 @@ const BoardView = () => {
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
+                  key= {ele.task_id}
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -124,6 +135,7 @@ const BoardView = () => {
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
+                  key= "2"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -155,7 +167,8 @@ const BoardView = () => {
           {ele.task_status === "Done" ? (
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
-                <button
+                <button 
+                  key= "3"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -188,6 +201,7 @@ const BoardView = () => {
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
+                key= "4"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"

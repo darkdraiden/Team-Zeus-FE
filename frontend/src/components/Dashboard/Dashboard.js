@@ -8,21 +8,22 @@ import BoardList from "./BoardList";
 function Dashboard() {
   const navigate = useNavigate();
   const [boardData, setBoardData] = useState([]);
-  let user_name="";
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
         let session_key = document.cookie.match(/session_id=([^;]*)/);
         let session = document.cookie.match(/user_name=([^;]*)/);
-        user_name=session[1];
+        if (session==null){
+          navigate("/")
+        }
+        let user_name=session[1];
         let res = await axios.post(
           `http://127.0.0.1:8000/${user_name}/dashboard`,
           {
             session_key: session_key[1]
           } 
         );
-
         if (!res.data.success) {
           alert(res.data.message);
           navigate("/");
@@ -35,7 +36,7 @@ function Dashboard() {
     }
     fetchData();
   },[]);
-
+  let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
   return (
     <div id="body_dashboard">
       <div id="dashboard">

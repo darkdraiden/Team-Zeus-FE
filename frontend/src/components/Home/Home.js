@@ -12,7 +12,7 @@ function Home() {
       setTitle("LoginPage");
     } else setTitle("SignupPage");
   };
-
+  
   return (
     <div id="Home">
       <nav>
