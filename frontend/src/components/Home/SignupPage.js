@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function SignupPage() {
   const navigate = useNavigate();
   const [first_name, setFirstName] = useState("");
@@ -26,7 +29,7 @@ function SignupPage() {
       setUserEmail("");
       setUserName("");
       setPassword("");
-      alert("Successfully Registered ! ");
+      toast.success("Successfully Registered ! ");
     } catch (e) {
       navigate("/");
     }

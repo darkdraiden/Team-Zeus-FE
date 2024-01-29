@@ -1,21 +1,27 @@
-import React ,{useEffect}from "react";
+import React, { useEffect } from "react";
 import { Modal, Col, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate} from "react-router";
+import { useNavigate } from "react-router";
+import { toast , ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const AddBoardModal = (props) => {
   const navigate = useNavigate();
   let session = document.cookie.match(/user_name=([^;]*)/);
+
   useEffect(() => {
     async function fetchData() {
-      if (session===null){
-        console.log("hello")
-        console.log(session)
+      if (session === null) {
+        console.log(session);
         navigate("/");
       }
     }
     fetchData();
-  },[]);
-  let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
+  }, []);
+
+  let user_name = document.cookie.match(/user_name=([^;]*)/)[1];
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -25,17 +31,21 @@ const AddBoardModal = (props) => {
       .then((response) => response.data)
       .then(
         (result) => {
-          alert("Successfully added board");
+          toast.success("Successfully added board");
           props.setupdated(true);
+
+          // Close the modal after successful submission
+          props.onHide();
         },
         (error) => {
-          alert("Unsuccessfull in adding board");
+          toast.error("Unsuccessful in adding board");
         }
       );
   };
+
   return (
     <div className="Container" id="modal">
-      <Modal {...props}>
+      <Modal {...props} onHide={props.onHide}>
         <Modal.Header closeButton>
           <Modal.Title>
             <p className="w-100 m-0">Add Board</p>
@@ -74,4 +84,5 @@ const AddBoardModal = (props) => {
     </div>
   );
 };
+
 export default AddBoardModal;

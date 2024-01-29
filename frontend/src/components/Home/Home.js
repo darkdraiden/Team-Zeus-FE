@@ -3,6 +3,8 @@ import "./homestyle.css";
 import "./login_signup_style.css";
 import SignupPage from "./SignupPage";
 import LoginPage from "./LoginPage";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
   const [title, setTitle] = useState("LoginPage");
@@ -15,6 +17,18 @@ function Home() {
   
   return (
     <div id="Home">
+      <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
       <nav>
         <div className="nav-right">
           <button
@@ -47,8 +61,6 @@ function Home() {
                 <div>
                   <LoginPage />
                   <div className="text-center last_login fs-6">
-                    {/* <button className="last_login_btn">Forgot password?</button> */}
-                    {/* <p className="m-0 fs-6">or</p> */}
                     <div>
                       <span>Not an existing User ? </span>
                     </div>

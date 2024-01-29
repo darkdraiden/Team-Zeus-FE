@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router";
 import TitleBar from "../Dashboard/TitleBar";
 import "font-awesome/css/font-awesome.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BoardView = () => {
   const navigate = useNavigate();
@@ -17,15 +19,13 @@ const BoardView = () => {
   let session = document.cookie.match(/user_name=([^;]*)/);
   useEffect(() => {
     async function fetchData() {
-      if (session===null){
-        console.log("hello")
-        console.log(session)
+      if (session === null) {
         navigate("/");
       }
     }
     fetchData();
-  },[]);
-  let user_name=document.cookie.match(/user_name=([^;]*)/)[1];
+  }, []);
+  let user_name = document.cookie.match(/user_name=([^;]*)/)[1];
   useEffect(() => {
     async function fetchData() {
       try {
@@ -37,7 +37,7 @@ const BoardView = () => {
           }
         );
         if (!res.data.success) {
-          alert(res.data.message);
+          toast.error(res.data.message);
           navigate("/");
         }
         setTaskData(res.data.data.task_list);
@@ -65,10 +65,10 @@ const BoardView = () => {
       return;
     };
 
-    const status = statusList.map((status_str,index) => {
+    const status = statusList.map((status_str, index) => {
       return (
         <>
-          <li className="btn-link" key= {index}>
+          <li className="btn-link" key={index}>
             <button
               className="btn w-100 h-100 p-0"
               onClick={() => onClickStatusDropdown(ele.task_id, status_str)}
@@ -82,7 +82,7 @@ const BoardView = () => {
 
     const assignTask = async (task_id) => {
       if (!isJoined) {
-        alert("Can't Assign. You Have not joined the Board !");
+        toast.error("Can't Assign. You Have not joined the Board !");
         return;
       }
       try {
@@ -102,7 +102,7 @@ const BoardView = () => {
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                  key= {ele.task_id}
+                  key={ele.task_id}
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -135,7 +135,7 @@ const BoardView = () => {
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                  key= "2"
+                  key="2"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -167,8 +167,8 @@ const BoardView = () => {
           {ele.task_status === "Done" ? (
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
-                <button 
-                  key= "3"
+                <button
+                  key="3"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -201,7 +201,7 @@ const BoardView = () => {
             <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                key= "4"
+                  key="4"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -243,8 +243,12 @@ const BoardView = () => {
 
         <div className="board_view_body mx-5">
           <h4 className="mb-2 mt-3 text-center">{board_name}</h4>
+          
           <div className="d-flex mt-4 justify-content-center">
-            <div id="tasktable_div" className="center-block scroll-inner fix-width">
+            <div
+              id="tasktable_div"
+              className="center-block scroll-inner fix-width"
+            >
               <table
                 className="table m-0 table-bordered table-striped"
                 id="task-table"
@@ -261,6 +265,20 @@ const BoardView = () => {
               </table>
             </div>
           </div>
+
+
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </div>
       </div>
     </div>

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import dashboard_img from "../../imgs/sneat.png";
 import AddBoardModal from "./AddBoardModal";
 import { useNavigate} from "react-router";
+
+
 function BoardList(props) {
   const navigate = useNavigate();
   let session = document.cookie.match(/user_name=([^;]*)/);
