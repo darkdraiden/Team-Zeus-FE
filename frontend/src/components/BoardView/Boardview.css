@@ -1,3 +1,9 @@
+
+.btn:not(:disabled){
+  outline:none;
+  border: none;
+}
+
 .board_view_outer{
   background-color: #dcdbff87;
   height: max-content;
@@ -116,6 +122,65 @@ tr div:hover{
   background-color: white!important;
   border-radius: 20px;
 }
+
+.taskshowmodal .modal-content{
+  padding: 2rem;
+}
+.taskshowmodal .ai-modal-container{
+  position: relative;
+}
+
+.taskshowmodal{
+  position: absolute;
+  background-color: #1c1c1e79!important;
+}
+.taskshowmodal .modal-header{
+  border-bottom: 0.8px solid #6183a7;
+  margin: auto;
+}
+.taskshowmodal .modal-header p{
+  font-size: 1.4rem;
+}
+.taskshowmodal .modal-content{
+  position: relative;
+  box-shadow: inset -13px -13px 20px #dcdbff87, inset 13px 13px 20px #dcdbff87;
+  background-color: #dcdbff87;
+  border-radius: 14px !important;
+}
+.taskshowmodal .modal-content::before{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../Home/home_bg2.webp") no-repeat center center/cover;
+  z-index: -1;
+  border-radius: 14px;
+}
+
+.taskshowmodal .modal-body{
+  margin-top: 1.4rem;
+  padding: 2rem 0rem;
+  border-radius: 14px;
+  background: none;
+
+}
+
+.modal-body label{
+  font-size: 0.8rem;
+  margin: 0;
+}
+.modal-body p{
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.behind{
+  z-index: -1;
+}
+
+
 
 @media only screen and (max-width: 1200px) {
   html{
