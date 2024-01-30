@@ -20,32 +20,43 @@ const TaskShowModal = (props) => {
             <Row className="my-2">
             <Col sm={6}>
               <label htmlFor="task_id">Task ID:</label>
-              <p id="task_id">{props.ele.task_id}</p>
+              <p id="task_id">{props.task_id}</p>
             </Col>
             <Col sm={6}>
               <label htmlFor="task_name">Task Name:</label>
-              <p id="task_name">{props.ele.task_name}</p>
+              <p id="task_name">{props.task_name}</p>
             </Col>
             </Row>
-            
+
+            <Row className="my-2">
+            <Col sm={6}>
+              <label htmlFor="board_id">Board ID:</label>
+              <p id="board_id">{props.board_id}</p>
+            </Col>
+            <Col sm={6}>
+              <label htmlFor="task_status">Task Status:</label>
+              <p id="task_status">{props.task_status}</p>
+            </Col>
+            </Row>
+
             <Row className="my-3">
             <Col sm={12}>
             <label htmlFor="task_desc">Task Description:</label>
-              <p id="task_desc">{props.ele.task_desc}</p>
+              <p id="task_desc">{props.task_desc}</p>
             </Col>
             </Row>
             
             <Row className="my-3">
             <Col sm={12}>
             <label htmlFor="time_stamp">Task Created:</label>
-              <p id="time_stamp">{props.ele.time_stamp}</p>
+              <p id="time_stamp">{props.time_stamp}</p>
             </Col>
             </Row>
 
             <Row className="my-3">
             <Col sm={12}>
             <label htmlFor="assigned_to">Task Assignee:</label>
-              <p id="assigned_to">{props.ele.assigned_to}</p>
+              <p id="assigned_to">{props.assigned_to}</p>
             </Col>
             </Row>
 

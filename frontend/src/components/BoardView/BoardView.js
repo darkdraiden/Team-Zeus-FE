@@ -18,8 +18,16 @@ const BoardView = () => {
   const [isJoined, setIsJoined] = useState(false);
   const [taskShow, setTaskShow] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [task_id_store,setTaskID]=useState("");
+  const [task_name_store,setTaskName]=useState("");
+  const [task_desc_store,setTaskDesc]=useState("");
+  const [time_stamp_store,setTimeStamp]=useState("");
+  const [assigned_to_store,setAssignedTo]=useState("");
+  const [task_status_store,setTaskStatus]=useState("");
   const statusList = ["To Do", "In Progress", "Done", "Cancelled"];
   let session = document.cookie.match(/user_name=([^;]*)/);
+
+
   useEffect(() => {
     async function fetchData() {
       if (session === null) {
@@ -97,125 +105,151 @@ const BoardView = () => {
       }
       return;
     };
-    const handleShowTask = (e) => {
-      e.preventDefault();
+    const handleShowTask =(task_id,task_name,task_desc,time_stamp,assigned_to,task_status)=> {
+      setTaskID(task_id);
+      setTaskName(task_name);
+      setTaskDesc(task_desc);
+      setTimeStamp(time_stamp);
+      setAssignedTo(assigned_to);
+      setTaskStatus(task_status);
       setTaskShow(true);
     };
     let taskHide = () => setTaskShow(false);
 
     return (
       <tr className="p-0 m-0" key={ele.task_id}>
-        <td className="table-cell tr-first-child">
+        <td className="table-cell tr-first-child" key="1">
           {ele.task_status === "To Do" ? (
-            <div className="btn task-box w-100 position-relative">
-              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
-                <button
-                  key={ele.task_id}
-                  type="button"
-                  className="btn dropdown-toggle p-0 ps-1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                ></button>
-                <ul className="dropdown-menu">{status}</ul>
-              </span>
-              <button className="btn w-100" onClick={handleShowTask}>
-                <h4>{ele.task_name}</h4>
-                <p>{ele.task_desc}</p>
-                <p className="time">Created at: {ele.time_stamp}</p>
-                <i
-                  className="fa fa-plus-circle"
-                  onClick={() => assignTask(ele.task_id)}
-                ></i>
-                <p>Assigned to : {ele.assigned_to}</p>
-              </button>
-              <TaskShowModal
-                ele={ele}
-                show={taskShow}
-                onHide={taskHide}
-                setupdated={setIsUpdated}
-              ></TaskShowModal>
-            </div>
+            <div className="task-box w-100 position-relative">
+            <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
+              <button
+                key="1"
+                type="button"
+                className="btn dropdown-toggle p-0 ps-1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></button>
+              <ul className="dropdown-menu">{status}</ul>
+            </span>
+            <h4>{ele.task_name}</h4>
+            <p>{ele.task_desc}</p>
+            <p className="time">Created at: {ele.time_stamp}</p>
+            <i
+              className="fa fa-plus-circle"
+              onClick={() => assignTask(ele.task_id)}
+            ></i>
+            <p>Assigned to : {ele.assigned_to}</p>
+            <button type="button" className="btn circle-btn" onClick={(e)=>handleShowTask(ele.task_id,ele.task_name,ele.task_desc,ele.time_stamp,ele.assigned_to,ele.task_status)}>
+              <i className="fa fa-circle"></i>
+            </button>
+            <TaskShowModal
+              task_id={task_id_store}
+              task_name={task_name_store}
+              task_desc={task_desc_store}
+              time_stamp={time_stamp_store}
+              assigned_to={assigned_to_store}
+              task_status={task_status_store}
+              board_id={board_id}
+              show={taskShow}
+              onHide={taskHide}
+              setupdated={setIsUpdated}
+            ></TaskShowModal>
+          </div>
           ) : (
             <div></div>
           )}
         </td>
 
-        <td className="table-cell tr-second-child">
+        <td className="table-cell tr-second-child" key="2">
           {ele.task_status === "In Progress" ? (
-            <div className="btn task-box w-100 position-relative">
-              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
-                <button
-                  key={ele.task_id}
-                  type="button"
-                  className="btn dropdown-toggle p-0 ps-1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                ></button>
-                <ul className="dropdown-menu">{status}</ul>
-              </span>
-              <button className="btn w-100" onClick={handleShowTask}>
-                <h4>{ele.task_name}</h4>
-                <p>{ele.task_desc}</p>
-                <p className="time">Created at: {ele.time_stamp}</p>
-                <i
-                  className="fa fa-plus-circle"
-                  onClick={() => assignTask(ele.task_id)}
-                ></i>
-                <p>Assigned to : {ele.assigned_to}</p>
-              </button>
-              <TaskShowModal
-                ele={ele}
-                show={taskShow}
-                onHide={taskHide}
-                setupdated={setIsUpdated}
-              ></TaskShowModal>
-            </div>
+            <div className="task-box w-100 position-relative">
+            <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
+              <button
+                key="2"
+                type="button"
+                className="btn dropdown-toggle p-0 ps-1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></button>
+              <ul className="dropdown-menu">{status}</ul>
+            </span>
+            <h4>{ele.task_name}</h4>
+            <p>{ele.task_desc}</p>
+            <p className="time">Created at: {ele.time_stamp}</p>
+            <i
+              className="fa fa-plus-circle"
+              onClick={() => assignTask(ele.task_id)}
+            ></i>
+            <p>Assigned to : {ele.assigned_to}</p>
+            <button type="button" className="btn circle-btn" onClick={(e)=>handleShowTask(ele.task_id,ele.task_name,ele.task_desc,ele.time_stamp,ele.assigned_to,ele.task_status)}>
+              <i className="fa fa-circle"></i>
+            </button>
+            <TaskShowModal
+              task_id={task_id_store}
+              task_name={task_name_store}
+              task_desc={task_desc_store}
+              time_stamp={time_stamp_store}
+              assigned_to={assigned_to_store}
+              task_status={task_status_store}
+              board_id={board_id}
+              show={taskShow}
+              onHide={taskHide}
+              setupdated={setIsUpdated}
+            ></TaskShowModal>
+          </div>
           ) : (
             <div></div>
           )}
         </td>
 
-        <td className="table-cell tr-third-child">
+        <td className="table-cell tr-third-child" key="3">
           {ele.task_status === "Done" ? (
-            <div className="btn task-box w-100 position-relative">
-              <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
-                <button
-                  key={ele.task_id}
-                  type="button"
-                  className="btn dropdown-toggle p-0 ps-1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                ></button>
-                <ul className="dropdown-menu">{status}</ul>
-              </span>
-              <button className="btn w-100" onClick={handleShowTask}>
-                <h4>{ele.task_name}</h4>
-                <p>{ele.task_desc}</p>
-                <p className="time">Created at: {ele.time_stamp}</p>
-                <i
-                  className="fa fa-plus-circle"
-                  onClick={() => assignTask(ele.task_id)}
-                ></i>
-                <p>Assigned to : {ele.assigned_to}</p>
-              </button>
-              <TaskShowModal
-                ele={ele}
-                show={taskShow}
-                onHide={taskHide}
-                setupdated={setIsUpdated}
-              ></TaskShowModal>
-            </div>
+            <div className="task-box w-100 position-relative">
+            <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
+              <button
+                key="3"
+                type="button"
+                className="btn dropdown-toggle p-0 ps-1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></button>
+              <ul className="dropdown-menu">{status}</ul>
+            </span>
+            <h4>{ele.task_name}</h4>
+            <p>{ele.task_desc}</p>
+            <p className="time">Created at: {ele.time_stamp}</p>
+            <i
+              className="fa fa-plus-circle"
+              onClick={() => assignTask(ele.task_id)}
+            ></i>
+            <p>Assigned to : {ele.assigned_to}</p>
+            <button type="button" className="btn circle-btn" onClick={(e)=>handleShowTask(ele.task_id,ele.task_name,ele.task_desc,ele.time_stamp,ele.assigned_to,ele.task_status)}>
+              <i className="fa fa-circle"></i>
+            </button>
+            <TaskShowModal
+              task_id={task_id_store}
+              task_name={task_name_store}
+              task_desc={task_desc_store}
+              time_stamp={time_stamp_store}
+              assigned_to={assigned_to_store}
+              task_status={task_status_store}
+              board_id={board_id}
+              show={taskShow}
+              onHide={taskHide}
+              setupdated={setIsUpdated}
+            ></TaskShowModal>
+          </div>
           ) : (
             <div></div>
           )}
         </td>
 
-        <td className="table-cell tr-fourth-child">
+        <td className="table-cell tr-fourth-child" key="4">
           {ele.task_status === "Cancelled" ? (
-            <div className="btn task-box w-100 position-relative">
+            <div className="task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                  key={ele.task_id}
+                  key="4"
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -223,22 +257,29 @@ const BoardView = () => {
                 ></button>
                 <ul className="dropdown-menu">{status}</ul>
               </span>
-              <button className="btn w-100" onClick={handleShowTask}>
-                <h4>{ele.task_name}</h4>
-                <p>{ele.task_desc}</p>
-                <p className="time">Created at: {ele.time_stamp}</p>
-                <i
-                  className="fa fa-plus-circle"
-                  onClick={() => assignTask(ele.task_id)}
-                ></i>
-                <p>Assigned to : {ele.assigned_to}</p>
+              <h4>{ele.task_name}</h4>
+              <p>{ele.task_desc}</p>
+              <p className="time">Created at: {ele.time_stamp}</p>
+              <i
+                className="fa fa-plus-circle"
+                onClick={() => assignTask(ele.task_id)}
+              ></i>
+              <p>Assigned to : {ele.assigned_to}</p>
+              <button type="button" className="btn circle-btn" onClick={(e)=>handleShowTask(ele.task_id,ele.task_name,ele.task_desc,ele.time_stamp,ele.assigned_to,ele.task_status)}>
+                <i className="fa fa-circle"></i>
               </button>
               <TaskShowModal
-                ele={ele}
-                show={taskShow}
-                onHide={taskHide}
-                setupdated={setIsUpdated}
-              ></TaskShowModal>
+              task_id={task_id_store}
+              task_name={task_name_store}
+              task_desc={task_desc_store}
+              time_stamp={time_stamp_store}
+              assigned_to={assigned_to_store}
+              board_id={board_id}
+              task_status={task_status_store}
+              show={taskShow}
+              onHide={taskHide}
+              setupdated={setIsUpdated}
+            ></TaskShowModal>
             </div>
           ) : (
             <div></div>
