@@ -122,7 +122,25 @@ tr div:hover{
   background-color: white!important;
   border-radius: 20px;
 }
-
+.circle-btn{
+  color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 0 0 20px 0;
+}
+.circle-btn:hover{
+  background-color: white;
+}
+.circle-btn i{
+  font-size: 10px;
+  padding: 0;
+}
 .taskshowmodal .modal-content{
   padding: 2rem;
 }
@@ -161,7 +179,7 @@ tr div:hover{
 
 .taskshowmodal .modal-body{
   margin-top: 1.4rem;
-  padding: 2rem 0rem;
+  padding: 2rem 0 0 0;
   border-radius: 14px;
   background: none;
 
