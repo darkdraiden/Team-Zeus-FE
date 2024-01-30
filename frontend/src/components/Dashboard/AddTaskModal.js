@@ -42,7 +42,7 @@ const AddTaskModal = (props) => {
 
   return (
     <div className="Container" id="modal">
-      <Modal {...props}>
+      <Modal {...props} className="title">
         <Modal.Header closeButton>
           <Modal.Title>
             <p className="w-100 m-0">Add Task</p>

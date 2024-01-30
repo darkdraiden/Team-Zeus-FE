@@ -6,6 +6,7 @@ import "font-awesome/css/font-awesome.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TaskShowModal from "./TaskShowModal";
 
 const BoardView = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const BoardView = () => {
   const [boardData, setBoardData] = useState([]);
   const [taskData, setTaskData] = useState([]);
   const [isJoined, setIsJoined] = useState(false);
+  const [taskShow, setTaskShow] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
   const statusList = ["To Do", "In Progress", "Done", "Cancelled"];
   let session = document.cookie.match(/user_name=([^;]*)/);
   useEffect(() => {
@@ -94,12 +97,17 @@ const BoardView = () => {
       }
       return;
     };
+    const handleShowTask = (e) => {
+      e.preventDefault();
+      setTaskShow(true);
+    };
+    let taskHide = () => setTaskShow(false);
 
     return (
       <tr className="p-0 m-0" key={ele.task_id}>
         <td className="table-cell tr-first-child">
           {ele.task_status === "To Do" ? (
-            <div className="task-box w-100 position-relative">
+            <div className="btn task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
                   key={ele.task_id}
@@ -110,20 +118,22 @@ const BoardView = () => {
                 ></button>
                 <ul className="dropdown-menu">{status}</ul>
               </span>
-              <h4>{ele.task_name}</h4>
-              <p>{ele.task_desc}</p>
-              <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to !== "Not assigned" ? (
-                <>
-                  <i className="fa fa-check-circle disabled"></i>
-                  <p>Assigned to : {ele.assigned_to}</p>
-                </>
-              ) : (
+              <button className="btn w-100" onClick={handleShowTask}>
+                <h4>{ele.task_name}</h4>
+                <p>{ele.task_desc}</p>
+                <p className="time">Created at: {ele.time_stamp}</p>
                 <i
                   className="fa fa-plus-circle"
                   onClick={() => assignTask(ele.task_id)}
                 ></i>
-              )}
+                <p>Assigned to : {ele.assigned_to}</p>
+              </button>
+              <TaskShowModal
+                ele={ele}
+                show={taskShow}
+                onHide={taskHide}
+                setupdated={setIsUpdated}
+              ></TaskShowModal>
             </div>
           ) : (
             <div></div>
@@ -132,10 +142,10 @@ const BoardView = () => {
 
         <td className="table-cell tr-second-child">
           {ele.task_status === "In Progress" ? (
-            <div className="task-box w-100 position-relative">
+            <div className="btn task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                  key="2"
+                  key={ele.task_id}
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -143,20 +153,22 @@ const BoardView = () => {
                 ></button>
                 <ul className="dropdown-menu">{status}</ul>
               </span>
-              <h4>{ele.task_name}</h4>
-              <p>{ele.task_desc}</p>
-              <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to !== "Not assigned" ? (
-                <>
-                  <i className="fa fa-check-circle disabled"></i>
-                  <p>Assigned to : {ele.assigned_to}</p>
-                </>
-              ) : (
+              <button className="btn w-100" onClick={handleShowTask}>
+                <h4>{ele.task_name}</h4>
+                <p>{ele.task_desc}</p>
+                <p className="time">Created at: {ele.time_stamp}</p>
                 <i
                   className="fa fa-plus-circle"
                   onClick={() => assignTask(ele.task_id)}
                 ></i>
-              )}
+                <p>Assigned to : {ele.assigned_to}</p>
+              </button>
+              <TaskShowModal
+                ele={ele}
+                show={taskShow}
+                onHide={taskHide}
+                setupdated={setIsUpdated}
+              ></TaskShowModal>
             </div>
           ) : (
             <div></div>
@@ -165,10 +177,10 @@ const BoardView = () => {
 
         <td className="table-cell tr-third-child">
           {ele.task_status === "Done" ? (
-            <div className="task-box w-100 position-relative">
+            <div className="btn task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                  key="3"
+                  key={ele.task_id}
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -176,20 +188,22 @@ const BoardView = () => {
                 ></button>
                 <ul className="dropdown-menu">{status}</ul>
               </span>
-              <h4>{ele.task_name}</h4>
-              <p>{ele.task_desc}</p>
-              <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to !== "Not assigned" ? (
-                <>
-                  <i className="fa fa-check-circle disabled"></i>
-                  <p>Assigned to : {ele.assigned_to}</p>
-                </>
-              ) : (
+              <button className="btn w-100" onClick={handleShowTask}>
+                <h4>{ele.task_name}</h4>
+                <p>{ele.task_desc}</p>
+                <p className="time">Created at: {ele.time_stamp}</p>
                 <i
                   className="fa fa-plus-circle"
                   onClick={() => assignTask(ele.task_id)}
                 ></i>
-              )}
+                <p>Assigned to : {ele.assigned_to}</p>
+              </button>
+              <TaskShowModal
+                ele={ele}
+                show={taskShow}
+                onHide={taskHide}
+                setupdated={setIsUpdated}
+              ></TaskShowModal>
             </div>
           ) : (
             <div></div>
@@ -198,10 +212,10 @@ const BoardView = () => {
 
         <td className="table-cell tr-fourth-child">
           {ele.task_status === "Cancelled" ? (
-            <div className="task-box w-100 position-relative">
+            <div className="btn task-box w-100 position-relative">
               <span className="float-right fs-6 top-0 end-0 h-auto bg-white p-1 btn-group dropend">
                 <button
-                  key="4"
+                  key={ele.task_id}
                   type="button"
                   className="btn dropdown-toggle p-0 ps-1"
                   data-bs-toggle="dropdown"
@@ -209,20 +223,22 @@ const BoardView = () => {
                 ></button>
                 <ul className="dropdown-menu">{status}</ul>
               </span>
-              <h4>{ele.task_name}</h4>
-              <p>{ele.task_desc}</p>
-              <p className="time">Created at: {ele.time_stamp}</p>
-              {ele.assigned_to !== "Not assigned" ? (
-                <>
-                  <i className="fa fa-check-circle disabled"></i>
-                  <p>Assigned to : {ele.assigned_to}</p>
-                </>
-              ) : (
+              <button className="btn w-100" onClick={handleShowTask}>
+                <h4>{ele.task_name}</h4>
+                <p>{ele.task_desc}</p>
+                <p className="time">Created at: {ele.time_stamp}</p>
                 <i
                   className="fa fa-plus-circle"
                   onClick={() => assignTask(ele.task_id)}
                 ></i>
-              )}
+                <p>Assigned to : {ele.assigned_to}</p>
+              </button>
+              <TaskShowModal
+                ele={ele}
+                show={taskShow}
+                onHide={taskHide}
+                setupdated={setIsUpdated}
+              ></TaskShowModal>
             </div>
           ) : (
             <div></div>
@@ -243,7 +259,7 @@ const BoardView = () => {
 
         <div className="board_view_body mx-5">
           <h4 className="mb-2 mt-3 text-center">{board_name}</h4>
-          
+
           <div className="d-flex mt-4 justify-content-center">
             <div
               id="tasktable_div"
@@ -265,7 +281,6 @@ const BoardView = () => {
               </table>
             </div>
           </div>
-
 
           <ToastContainer
             position="top-center"

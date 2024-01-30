@@ -45,7 +45,7 @@ const AddBoardModal = (props) => {
 
   return (
     <div className="Container" id="modal">
-      <Modal {...props} onHide={props.onHide}>
+      <Modal {...props} onHide={props.onHide} className="title">
         <Modal.Header closeButton>
           <Modal.Title>
             <p className="w-100 m-0">Add Board</p>
