@@ -4,7 +4,7 @@ import AddBoardModal from "./AddBoardModal";
 import { Link, useNavigate } from "react-router-dom";
 import AddTaskModal from "./AddTaskModal";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function TitleBar(props) {
@@ -63,7 +63,6 @@ function TitleBar(props) {
       toast.success(res.data.message);
       // Update the join status in the state
       setIsJoined(true);
-      
     } catch (error) {
       toast.error("Error joining board");
     }
@@ -108,7 +107,7 @@ function TitleBar(props) {
       let session_key = document.cookie.match(/session_id=([^;]*)/);
       let temp = session_key[1];
       document.cookie = `session_id=${session_key}; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/;`;
-      
+
       let res = await axios.post(
         `http://127.0.0.1:8000/${props.user_name}/logout`,
         {
@@ -123,12 +122,10 @@ function TitleBar(props) {
   return (
     <div id="title-bar">
       <div id="title">
-        <div className="float-right">
-          <button className="btn btn-i" onClick={handleLogout}>
+        <div className="btn-group float-left d-flex">
+          <button className="btn btn-i ms-2" onClick={handleLogout}>
             <i className="fa fa-sign-out"></i>
           </button>
-        </div>
-        <div className="btn-group float-left d-flex me-auto">
           <Link
             type="button"
             id="back_btn"

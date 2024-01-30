@@ -68,7 +68,7 @@ function BoardList(props) {
           <div className="col-lg-7 my-2">
             <button
               id="add_board_btn"
-              className="btn btn-i"
+              className="btn"
               onClick={handleAdd}
             >
               <i className="fa fa-plus-circle pe-2"></i>
